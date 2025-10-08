@@ -1,10 +1,15 @@
 import express from "express";
+
 const app = express();
 
+// Health check
 app.get("/health", (req, res) => {
   res.status(200).send("OK");
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000");
+// Porta separada só para o servidor web
+const PORT = process.env.WEB_PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor web rodando na porta ${PORT}`);
 });
