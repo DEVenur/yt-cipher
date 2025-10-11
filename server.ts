@@ -14,6 +14,12 @@ const API_TOKEN = Deno.env.get("API_TOKEN");
 async function baseHandler(req: Request): Promise<Response> {
     const { pathname } = new URL(req.url);
 
+    // --- Endpoint de saúde: Adicione este bloco aqui ---
+    if (req.method === "GET" && pathname === "/healthz") {
+        return new Response("OK", { status: 200, headers: { "Content-Type": "text/plain" } });
+    }
+    // ----------------------------------------------------
+
     if (req.method === "GET" && pathname === "/") {
         return new Response("There is no endpoint here, you can read the API spec at https://github.com/kikkia/yt-cipher?tab=readme-ov-file#api-specification. If you are using yt-source/lavalink, use this url for your remote cipher url", {
             status: 200,
