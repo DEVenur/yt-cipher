@@ -17,4 +17,4 @@ redcipher:
       HOST: 0.0.0.0
       MAX_THREADS: 1
       PREPROCESSED_CACHE_SIZE: 150
-      API_TOKEN: your_pass
+      API_TOKEN: ${API_TOKEN_ENV_VAR}
