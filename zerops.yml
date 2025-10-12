@@ -1,34 +1,35 @@
 zerops:
   - setup: deno
-    # ==== how to build your application ====
     build:
-      # what technologies should the build
-      # container be based on (can be an array)
       base: deno@2
-
-      # what commands to use to build your app
       buildCommands:
-        - deno task build
-
-      # select which files / folders to deploy
-      # after the build successfully finished
+        # Patch EJS necessário
+        - deno run --allow-read --allow-write ./scripts/patch-ejs.ts
       deployFiles:
-        - dist
+        - scripts
+        - src
+        - server.ts
+        - worker.ts
         - deno.jsonc
+      cache:
+        - .deno_dir
+        - deps
 
-    # ==== how to run your application ====
     run:
-      # what technology should the runtime
-      # container be based on, can be extended
-      # in `run.prepareCommands` using
-      # `sudo zsc install nodejs@20`
       base: deno@2
-
-      # what ports your app listens on
-      # and whether it supports http traffic
       ports:
         - port: 8001
           httpSupport: true
-
-      # how to start your application
-      start: deno task start
+      start: >
+        deno run 
+        --allow-net 
+        --allow-read 
+        --allow-write 
+        --allow-env 
+        server.ts
+      env:
+        PORT: 8001
+        HOST: 0.0.0.0
+        MAX_THREADS: 1
+        PREPROCESSED_CACHE_SIZE: 150
+        API_TOKEN: your_pass
