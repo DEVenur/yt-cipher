@@ -2,7 +2,7 @@ zerops:
   - setup: redcipher 
     run:
       prepareCommands:
-        - docker image pull ghcr.io/kikkia/yt-cipher:master
+      - docker image pull ghcr.io/kikkia/yt-cipher:master
       start: docker run --network=host -e API_TOKEN=test ghcr.io/kikkia/yt-cipher:master
       ports:
       - port: 8001 
