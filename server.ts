@@ -14,7 +14,7 @@ const API_TOKEN = Deno.env.get("API_TOKEN");
 async function baseHandler(req: Request): Promise<Response> {
     const { pathname } = new URL(req.url);
 
-    // --- Endpoint de saúde: Adicione este bloco aqui ---
+    // --- Health Endpoint: Block added to work on Render ---
     if (req.method === "GET" && pathname === "/healthz") {
         return new Response("OK", { status: 200, headers: { "Content-Type": "text/plain" } });
     }
