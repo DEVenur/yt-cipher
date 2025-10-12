@@ -186,3 +186,8 @@ Resolves a raw stream URL by handling the signature and n-parameter decryption, 
   "resolved_url": "..."
 }
 ```
+
+### `Healthz` 
+
+- Add /healthz when deploying to Render. This only works to prevent the free plan from sleeping after 15 minutes.
+- Paste your IP/domain and add /healthz at the end. If everything is correct, you'll see an "ok" message.
