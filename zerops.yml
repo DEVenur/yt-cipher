@@ -1,5 +1,5 @@
 zerops:
-  - setup: yt-cipher
+  - setup: app  # Deve ser 'app', 'api', 'runtime', etc.
     build:
       base: deno@1.42
       buildCommands:
