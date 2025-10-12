@@ -1,18 +1,9 @@
 zerops:
-  - setup: redcipher
+  - setup: redcipher # nome único do serviço
     run:
-      base: docker@26.1
-      # pull da imagem oficial do yt-cipher
       prepareCommands:
-        - docker pull ghcr.io/kikkia/yt-cipher:master
-      # start docker com a imagem yt-cipher
-      start: >
-        docker run 
-        --network=host 
-        -e API_TOKEN=test 
-        ghcr.io/kikkia/yt-cipher:master
-
-      # porta que o yt-cipher escuta
-      ports:
-        - port: 8001
-          httpSupport: true
+        - docker image pull ghcr.io/kikkia/yt-cipher:master # usa a imagem oficial
+      start: docker run --network=host -e API_TOKEN=test ghcr.io/kikkia/yt-cipher:master # roda o container com token
+    ports:
+      - port: 8001 # porta padrão do yt-cipher
+        httpSupport: true # é um serviço HTTP
