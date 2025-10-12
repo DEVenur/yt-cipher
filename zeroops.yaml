@@ -1,0 +1,32 @@
+zerops:
+  - setup: yt-cipher
+    build:
+      base: deno@1.42
+      buildCommands:
+        # Patch EJS (necessário)
+        - deno run --allow-read --allow-write ./scripts/patch-ejs.ts
+      deployFiles:
+        - src
+        - scripts
+        - server.ts
+        - deno.jsonc
+      cache:
+        - .deno_dir
+        - deps
+    run:
+      base: deno@1.42
+      ports:
+        - port: 8001
+      start: >
+        deno run 
+        --allow-net 
+        --allow-read 
+        --allow-write 
+        --allow-env 
+        server.ts
+      env:
+        PORT: 8001
+        HOST: 0.0.0.0
+        MAX_THREADS: 1
+        PREPROCESSED_CACHE_SIZE: 150
+        API_TOKEN: your_pass
