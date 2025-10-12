@@ -1,20 +1,34 @@
-redcipher:
-  build:
-    base: deno@2
-    buildCommands:
-      - deno task build
-    deployFiles:
-      - dist
-      - deno.jsonc
-  run:
-    base: deno@2
-    ports:
-      - port: 8000
-        httpSupport: true
-    start: deno task start
-    env:
-      PORT: 8000
-      HOST: 0.0.0.0
-      MAX_THREADS: 1
-      PREPROCESSED_CACHE_SIZE: 150
-      API_TOKEN: ${API_TOKEN_ENV_VAR}
+zerops:
+  - setup: deno
+    # ==== how to build your application ====
+    build:
+      # what technologies should the build
+      # container be based on (can be an array)
+      base: deno@2
+
+      # what commands to use to build your app
+      buildCommands:
+        - deno task build
+
+      # select which files / folders to deploy
+      # after the build successfully finished
+      deployFiles:
+        - dist
+        - deno.jsonc
+
+    # ==== how to run your application ====
+    run:
+      # what technology should the runtime
+      # container be based on, can be extended
+      # in `run.prepareCommands` using
+      # `sudo zsc install nodejs@20`
+      base: deno@2
+
+      # what ports your app listens on
+      # and whether it supports http traffic
+      ports:
+        - port: 8001
+          httpSupport: true
+
+      # how to start your application
+      start: deno task start
