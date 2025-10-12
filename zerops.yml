@@ -1,14 +1,15 @@
 zerops:
-  - setup: app  # Deve ser 'app', 'api', 'runtime', etc.
+  - setup: app   # 'app' é um tipo válido
     build:
       base: deno@1.42
       buildCommands:
-        # Patch EJS (necessário)
+        # Patch do EJS necessário
         - deno run --allow-read --allow-write ./scripts/patch-ejs.ts
       deployFiles:
         - src
         - scripts
         - server.ts
+        - worker.ts
         - deno.jsonc
       cache:
         - .deno_dir
