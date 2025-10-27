@@ -24,6 +24,13 @@ export const responseCodes = Counter.with({
     registry: [registry],
 });
 
+export const workerErrors = Counter.with({
+    name: "worker_errors_total",
+    help: "Total number of worker errors.",
+    labels: ["player_id", "message"],
+    registry: [registry],
+});
+
 export const endpointLatency = Histogram.with({
     name: "http_request_duration_seconds",
     help: "HTTP request duration in seconds.",
@@ -43,5 +50,12 @@ export const playerUrlRequests = Counter.with({
     name: "player_url_requests_total",
     help: "Total number of requests for each player ID.",
     labels: ["player_id"],
+    registry: [registry],
+});
+
+export const playerScriptFetches = Counter.with({
+    name: "player_script_fetches_total",
+    help: "Total number of player script fetches.",
+    labels: ["player_url", "status"],
     registry: [registry],
 });

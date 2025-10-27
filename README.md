@@ -2,10 +2,20 @@ An http api wrapper for [yt-dlp/ejs](https://github.com/yt-dlp/ejs).
 
 # Getting Started
 
+## Lavalink
+The absolute easiest way to use this with Lavalink is to just add this to the youtube plugin config
+```yaml
+plugins:
+  youtube:
+    remoteCipher:
+      url: "https://cipher.kikkia.dev/"
+      userAgent: "your_service_name" # Optional
+```
+
 ## Public instance
 
 You can use the public instance without a password at `https://cipher.kikkia.dev/`. 
-I do my best to keep it up and running and decently fast, but I don't garuntee 100% uptime. Feel free to host it yourself or use the public API.
+I do my best to keep it up and running and decently fast, but I don't guaruntee 100% uptime. Feel free to host it yourself or use the public API.
 
 WARNING: Ratelimit of 10 requests/sec (should be fine up to 1000+ active players). If you have more than 1k players you probably want to host it yourself.
 
@@ -34,7 +44,7 @@ git clone https://github.com/kikkia/yt-cipher.git
 cd yt-cipher
 git clone https://github.com/yt-dlp/ejs.git
 cd ejs
-git checkout 689764f8cea694e99609a41f1630d2e7e8e8668a
+git checkout 5d7bf090bb9a2a8f3e2dd13ded4a21a009224f87
 cd ..
 deno run --allow-read --allow-write ./scripts/patch-ejs.ts
 ```

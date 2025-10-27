@@ -5,10 +5,11 @@ RUN apt-get update && apt-get install -y git npm
 WORKDIR /usr/src/app
 
 # Clone ejs repository, then patch it to be deno compatible
+# ----- TEMP WORKAROUND TILL IN UPSTREAM ----
 RUN git clone https://github.com/yt-dlp/ejs.git
 
 # Pin to a specific commit to avoid breakages
-RUN cd ejs && git checkout 689764f8cea694e99609a41f1630d2e7e8e8668a && cd ..
+RUN cd ejs && git checkout 25b77b73108ae08451fb06b98a787712c06298a5 && deno install && cd ..
 
 COPY scripts/patch-ejs.ts ./scripts/patch-ejs.ts
 RUN deno run --allow-read --allow-write ./scripts/patch-ejs.ts
@@ -22,7 +23,8 @@ COPY --from=builder /usr/src/app/ejs ./ejs
 
 COPY . .
 
-RUN mkdir -p player_cache && chown -R deno:deno player_cache
+RUN mkdir -p player_cache
+RUN chown -R deno:deno .
 
 EXPOSE 8001
 
